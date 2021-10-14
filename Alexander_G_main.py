@@ -41,7 +41,7 @@ while filename_valid == False:#
             print("")
         print("That is not a number")
 import json
-f = open("data.json")
+f = open("Alexander_G_data.json")
 data = json.load(f)
 #Presets Test
 #Goal it should ask the user for a list of presets avaible and it should then genearate the windows with the presets
