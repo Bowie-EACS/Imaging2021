@@ -277,39 +277,58 @@ elif keypressed == ord('s'):
     print('{0:2}       {1}'.format("Red Yellow Green", "9"))
     print('{0:2}             {1}'.format("RGB+Yellow", "10"))
     print('{0:2}        {1}'.format("RGB+Yellow+Pink", "11"))
-    color_save = input("Which color would you like to save? ")
+    color_save = input("Which color would you like to save? ")    
+    answer_valid= False
     
-    if color_save == "0":
-        cv2.imwrite(file_name+'_GS.jpg',grayscale_image)
-    elif color_save == "1":
-        cv2.imwrite(file_name+'_Custom.jpg',final_image)
-#Red
-    elif color_save == "2":
-        cv2.imwrite(file_name+'_Red.jpg',color1_parts)
-#Yellow
-    elif color_save == "3":
-        cv2.imwrite(file_name+'_Yellow.jpg',color2_parts)
-#Green
-    elif color_save == "4":
-        cv2.imwrite(file_name+'_Green.jpg',color3_parts)
-#Blue
-    elif color_save == "5":
-        cv2.imwrite(file_name+'_Blue.jpg',color4_parts)
-#Pink
-    elif color_save == "6":
-        cv2.imwrite(file_name+'_Pink.jpg',color5_parts)
-#Teal
-    elif color_save == "7":
-        cv2.imwrite(file_name+'_Teal.jpg',color6_parts)
-#Red and Yellow
-    elif color_save == "8":
-        cv2.imwrite(file_name+'_RY.jpg',red_and_yellow)
-#Red, Yellow and Green
-    elif color_save == "9":
-        cv2.imwrite(file_name+'_RYG.jpg',red_yellow_and_green)
-#Red, Yellow, Green and Blue
-    elif color_save == "10":
-        cv2.imwrite(file_name+'_RGBY.jpg', red_yellow_green_and_blue)
-#Red, Yellow, Green, Blue, and Pink        
-    elif color_save == "11":
-        cv2.imwrite(file_name+'_RGBYP.jpg', red_yellow_green_blue_and_pink)
+    while answer_valid == False:
+        color_save = input("Which color would you like to save? ")
+        if color_save == "0":
+            answer_valid = True
+            cv2.imwrite(file_name+'_GS.jpg',grayscale_image)
+        if color_save == "1":
+            answer_valid = True
+            cv2.imwrite(file_name+'_Custom.jpg',final_image)
+    #Red
+        if color_save == "2":
+            answer_valid = True
+            cv2.imwrite(file_name+'_Red.jpg',color1_parts)
+    #Yellow
+        if color_save == "3":
+            answer_valid = True
+            cv2.imwrite(file_name+'_Yellow.jpg',color2_parts)
+    #Green
+        if color_save == "4":
+            answer_valid = True
+            cv2.imwrite(file_name+'_Green.jpg',color3_parts)
+    #Blue
+        if color_save == "5":
+            answer_valid = True
+            cv2.imwrite(file_name+'_Blue.jpg',color4_parts)
+    #Pink
+        if color_save == "6":
+            answer_valid = True
+            cv2.imwrite(file_name+'_Pink.jpg',color5_parts)
+    #Teal
+        if color_save == "7":
+            answer_valid = True
+            cv2.imwrite(file_name+'_Teal.jpg',color6_parts)
+    #Red and Yellow
+        if color_save == "8":
+            answer_valid = True
+            cv2.imwrite(file_name+'_RY.jpg',red_and_yellow)
+    #Red, Yellow and Green
+        if color_save == "9":
+            answer_valid = True
+            cv2.imwrite(file_name+'_RYG.jpg',red_yellow_and_green)
+    #Red, Yellow, Green and Blue
+        if color_save == "10":
+            answer_valid = True
+            cv2.imwrite(file_name+'_RGBY.jpg', red_yellow_green_and_blue)
+    #Red, Yellow, Green, Blue, and Pink        
+        if color_save == "11":
+            answer_valid = True
+            cv2.imwrite(file_name+'_RGBYP.jpg', red_yellow_green_blue_and_pink)
+        else:
+            print("Something was wrong with that answer. Please try again: ")
+            
+    cv2.destroyAllWindows()
