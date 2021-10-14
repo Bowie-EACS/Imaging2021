@@ -2,7 +2,7 @@
 """
 Created on Thu Sep  9 15:33:23 2021
 
-@author: S2124194
+@author: Matthew O'Leary S2124194
 """
 
 #Color Changing CODE
