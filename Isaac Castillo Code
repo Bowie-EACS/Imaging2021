@@ -1,0 +1,227 @@
+# -*- coding: utf-8 -*-
+"""
+Thursday 09/09/2021
+Isaac Christopher Castillo
+"""
+# Images_01_Starting_Code
+# Engineer Your World
+import cv2
+import numpy
+import os.path
+import random
+
+def newTrackbarPos(trackbar_name, trackbar_window, min_val):
+    current_pos = cv2.getTrackbarPos(trackbar_name, trackbar_window)
+    if current_pos < min_val:
+        cv2.setTrackbarPos(trackbar_name, trackbar_window, min_val)
+        print("That's too low")
+        return min_val 
+    else:
+        return current_pos
+    
+def Kimmy_Jon():
+    cv2.setTrackbarPos("color1R", 'Red Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color1B", 'Red Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color1G", 'Red Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color2R", 'Yellow Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color2B", 'Yellow Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color2G", 'Yellow Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color3R", 'Green Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color3B", 'Green Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color3G", 'Green Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color4R", 'Blue Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color4B", 'Blue Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color4G", 'Blue Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color5R", 'Orange Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color5B", 'Orange Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color5G", 'Orange Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color6R", 'Pink Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color6B", 'Pink Parts of Image', random.randrange(0, 255))
+    cv2.setTrackbarPos("color6G", 'Pink Parts of Image', random.randrange(0, 255))
+
+print ("Save your original image in the same folder as this program.")
+filename_valid = False
+while filename_valid == False:
+    filename = input("Enter the name of your file, including the "\
+                                 "extension, and then press 'enter': ")
+    if os.path.isfile(filename) == True:
+        filename_valid = True
+    else:
+        print ("Something was wrong with that filename. Please try again.")
+
+#TAKES THE FILE
+original_image = cv2.imread(filename,1)
+grayscale_image_simple = cv2.imread(filename, 0)
+grayscale_image = cv2.cvtColor(grayscale_image_simple, cv2.COLOR_GRAY2BGR)
+
+#CREATES THE DISPLAYS 
+cv2.namedWindow('Original Image')
+cv2.namedWindow('Grayscale Image')
+cv2.namedWindow('Red Parts of Image')
+cv2.namedWindow('Yellow Parts of Image')
+cv2.namedWindow('Green Parts of Image')
+cv2.namedWindow('Blue Parts of Image')
+cv2.namedWindow('Orange Parts of Image')
+cv2.namedWindow('Pink Parts of Image')
+
+
+cv2.namedWindow('Customized Image')
+
+
+image_height = original_image.shape[0]
+image_width = original_image.shape[1]
+image_channels = original_image.shape[2]
+
+
+#MAKES EMPTY WINDOWS
+red_paper = numpy.zeros((image_height,image_width,image_channels), numpy.uint8)
+yellow_paper = numpy.zeros((image_height,image_width,image_channels),
+                           numpy.uint8)
+green_paper = numpy.zeros((image_height,image_width,image_channels), numpy.uint8)
+blue_paper = numpy.zeros((image_height,image_width,image_channels), numpy.uint8)
+orange_paper = numpy.zeros((image_height,image_width,image_channels), numpy.uint8)
+pink_paper = numpy.zeros((image_height,image_width,image_channels), numpy.uint8)
+
+#trackbar
+cv2.createTrackbar('redYellow', 'Customized Image', 20, 64, lambda x:None)
+cv2.createTrackbar('blueGreen', 'Customized Image', 130, 190, lambda x:None)
+cv2.createTrackbar('orangePink', 'Customized Image', 190, 225, lambda x:None)
+
+cv2.imshow('Original Image', original_image)
+cv2.imshow('Grayscale Image',grayscale_image)
+
+cv2.createTrackbar("color1R", 'Red Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color1B", 'Red Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color1G", 'Red Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color2R", 'Yellow Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color2B", 'Yellow Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color2G", 'Yellow Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color3R", 'Green Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color3B", 'Green Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color3G", 'Green Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color4R", 'Blue Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color4B", 'Blue Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color4G", 'Blue Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color5R", 'Orange Parts of Image', 0, 255, lambda x:None)
+cv2.createTrackbar("color5B", 'Orange Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color5G", 'Orange Parts of Image', 165, 255, lambda x:None)
+cv2.createTrackbar("color6R", 'Pink Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color6B", 'Pink Parts of Image', 255, 255, lambda x:None)
+cv2.createTrackbar("color6G", 'Pink Parts of Image', 0, 255, lambda x:None)
+
+
+
+    
+keypressed = 1
+while(keypressed !=27 and keypressed != ord('s')):
+    #Color Value Sliders
+    #Color for "Papers" {b, g, r}
+    red_paper[0:image_height, 0:image_width, 0:image_channels] = [cv2.getTrackbarPos("color1R", 'Red Parts of Image'),cv2.getTrackbarPos("color1B", 'Red Parts of Image'),cv2.getTrackbarPos("color1G", 'Red Parts of Image',)]
+    yellow_paper[0:image_height, 0:image_width, 0:image_channels] = [cv2.getTrackbarPos("color2R", 'Yellow Parts of Image'), cv2.getTrackbarPos("color2B", 'Yellow Parts of Image'), cv2.getTrackbarPos("color2G", 'Yellow Parts of Image')]
+    green_paper[0:image_height, 0:image_width, 0:image_channels] = [cv2.getTrackbarPos("color3R", 'Green Parts of Image'),cv2.getTrackbarPos("color3B", 'Green Parts of Image'),cv2.getTrackbarPos("color3G", 'Green Parts of Image',)]
+    blue_paper[0:image_height, 0:image_width, 0:image_channels] = [cv2.getTrackbarPos("color4R", 'Blue Parts of Image'),cv2.getTrackbarPos("color4B", 'Blue Parts of Image'),cv2.getTrackbarPos("color4G", 'Blue Parts of Image',)]
+    orange_paper[0:image_height, 0:image_width, 0:image_channels] = [cv2.getTrackbarPos("color5R", 'Orange Parts of Image'),cv2.getTrackbarPos("color5B", 'Orange Parts of Image'),cv2.getTrackbarPos("color5G", 'Orange Parts of Image',)]
+    pink_paper[0:image_height, 0:image_width, 0:image_channels] = [cv2.getTrackbarPos("color6R", 'Pink Parts of Image'),cv2.getTrackbarPos("color6B", 'Pink Parts of Image'),cv2.getTrackbarPos("color6G", 'Pink Parts of Image',)]
+
+    #THIS SETS THE POINT WERE IT DIVIDES LIGHT AND DARK
+    grayscale_break1 = newTrackbarPos('Red Yellow', 'Customized Image', 5)
+    grayscale_break2 = newTrackbarPos('blueGreen', 'Customized Image', 85)
+    grayscale_break3 = newTrackbarPos('orangePink', 'Customized Image', 170)   
+
+                                                                                                                                              
+    grayscale_break = newTrackbarPos('Red/Yellow', 'Slider', 1)
+    min_grayscale_for_red = [0,0,0]
+    max_grayscale_for_red = [grayscale_break1,grayscale_break1,grayscale_break1]
+    min_grayscale_for_yellow = [grayscale_break1+1,grayscale_break1+1,grayscale_break1+1]
+    max_grayscale_for_yellow = [85,85,85]
+    min_grayscale_for_blue = [86,86,86]
+    max_grayscale_for_blue = [grayscale_break2,grayscale_break2,grayscale_break2]
+    min_grayscale_for_green = [grayscale_break2+1,grayscale_break2+1,grayscale_break2+1]
+    
+    max_grayscale_for_green = [170,170,170]
+    min_grayscale_for_orange = [171,171,171]
+    max_grayscale_for_orange = [grayscale_break3,grayscale_break3,grayscale_break3]
+    min_grayscale_for_pink = [grayscale_break3+1, grayscale_break3+1, grayscale_break3+1]
+    max_grayscale_for_pink = [255,255,255]
+    
+    min_grayscale_for_red = numpy.array(min_grayscale_for_red, dtype = "uint8")
+    max_grayscale_for_red = numpy.array(max_grayscale_for_red, dtype = "uint8")
+    min_grayscale_for_yellow = numpy.array(min_grayscale_for_yellow,
+                                               dtype = "uint8")
+    max_grayscale_for_yellow = numpy.array(max_grayscale_for_yellow,
+                                               dtype = "uint8")
+    min_grayscale_for_blue = numpy.array(min_grayscale_for_blue, dtype = "uint8")
+    max_grayscale_for_blue = numpy.array(max_grayscale_for_blue, dtype = "uint8")
+    min_grayscale_for_green = numpy.array(min_grayscale_for_green,
+                                               dtype = "uint8")
+    max_grayscale_for_green = numpy.array(max_grayscale_for_green,
+                                               dtype = "uint8")
+    min_grayscale_for_orange = numpy.array(min_grayscale_for_orange, dtype = "uint8")
+    max_grayscale_for_orange = numpy.array(max_grayscale_for_orange, dtype = "uint8")
+    min_grayscale_for_pink = numpy.array(min_grayscale_for_pink,
+                                               dtype = "uint8")
+    max_grayscale_for_pink = numpy.array(max_grayscale_for_pink,
+                                               dtype = "uint8")
+    
+    block_all_but_the_red_parts = cv2.inRange(grayscale_image,
+                                                  min_grayscale_for_red,
+                                                  max_grayscale_for_red)
+    block_all_but_the_yellow_parts = cv2.inRange(grayscale_image,
+                                                  min_grayscale_for_yellow,
+                                                  max_grayscale_for_yellow)
+    block_all_but_the_orange_parts = cv2.inRange(grayscale_image,
+                                                  min_grayscale_for_orange,
+                                                  max_grayscale_for_orange)
+    block_all_but_the_pink_parts = cv2.inRange(grayscale_image,
+                                                  min_grayscale_for_pink,
+                                                  max_grayscale_for_pink)
+    block_all_but_the_blue_parts = cv2.inRange(grayscale_image,
+                                                  min_grayscale_for_blue,
+                                                  max_grayscale_for_blue)
+    block_all_but_the_green_parts = cv2.inRange(grayscale_image,
+                                                  min_grayscale_for_green,
+                                                  max_grayscale_for_green)
+        
+    red_parts_of_image = cv2.bitwise_or(red_paper, red_paper,
+                                            mask = block_all_but_the_red_parts)
+    yellow_parts_of_image = cv2.bitwise_or(yellow_paper, yellow_paper,
+                                            mask = block_all_but_the_yellow_parts)
+    blue_parts_of_image = cv2.bitwise_or(blue_paper, blue_paper,
+                                            mask = block_all_but_the_blue_parts)
+    green_parts_of_image = cv2.bitwise_or(green_paper, green_paper,
+                                            mask = block_all_but_the_green_parts)
+    orange_parts_of_image = cv2.bitwise_or(orange_paper, orange_paper,
+                                            mask = block_all_but_the_orange_parts)
+    pink_parts_of_image = cv2.bitwise_or(pink_paper, pink_paper,
+                                            mask = block_all_but_the_pink_parts)
+    
+    
+    customized_image1 = cv2.bitwise_or(red_parts_of_image, yellow_parts_of_image)
+    customized_image2 = cv2.bitwise_or(blue_parts_of_image, green_parts_of_image)
+    customized_image3 = cv2.bitwise_or(orange_parts_of_image, pink_parts_of_image)
+    customized_image4 = cv2.bitwise_or(customized_image1, customized_image2,)
+    customized_image = cv2.bitwise_or(customized_image4, customized_image3)
+    
+    
+    cv2.imshow('Red Parts of Image',red_parts_of_image)
+    cv2.imshow('Yellow Parts of Image',yellow_parts_of_image)
+    cv2.imshow('Customized Image',customized_image)
+    cv2.imshow('Green Parts of Image',green_parts_of_image)   
+    cv2.imshow('Blue Parts of Image', blue_parts_of_image)
+    cv2.imshow('Orange Parts of Image', orange_parts_of_image)
+    cv2.imshow('Pink Parts of Image', pink_parts_of_image)
+
+
+if keypressed == ord('r'):
+    print('you pressed RANDOM!')
+
+
+keypressed = cv2.waitKey(1)
+if keypressed == 27:
+    cv2.destroyAllWindows()
+if keypressed == ord('s'):
+    NewfileName = input("Enter Your New FileName")
+#cv2.imwrite('photo_GS_1.jpg',grayscale_image)
+cv2.imwrite(NewfileName ,customized_image)
+cv2.destroyAllWindows()
+
